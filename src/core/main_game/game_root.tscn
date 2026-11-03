@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://20g42hdqqspy"]
+
+[node name="GameRoot" type="Node2D" unique_id=1404149591]
+
+[node name="Systems" type="Node" parent="." unique_id=1736558554]
+
+[node name="World" type="Node2D" parent="." unique_id=119228256]
+
+[node name="LevelRoot" type="Node2D" parent="World" unique_id=1971520173]
+unique_name_in_owner = true
+
+[node name="EntityRoot" type="Node2D" parent="World" unique_id=1192314847]
+unique_name_in_owner = true
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=1211742832]
+layer = 10
+
+[node name="HudRoot" type="Control" parent="HudLayer" unique_id=1719488925]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=739467957]
+layer = 20
+
+[node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=2009231033]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
