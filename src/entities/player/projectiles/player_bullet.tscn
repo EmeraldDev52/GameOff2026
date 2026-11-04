@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://gmlyo5d1gjrk"]
+
+[ext_resource type="Script" uid="uid://btmiar7g26kso" path="res://src/entities/player/projectiles/player_bullet.gd" id="1_pwnt1"]
+[ext_resource type="Texture2D" uid="uid://bfpeehforo1yt" path="res://src/assets/placeholders/weapons/bulleta.png" id="2_6ptft"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acsdx"]
+radius = 2.0
+
+[node name="PlayerBullet" type="Area2D" unique_id=1203734050]
+script = ExtResource("1_pwnt1")
+
+[node name="Visuals" type="Sprite2D" parent="." unique_id=1915073503]
+texture_filter = 1
+texture = ExtResource("2_6ptft")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=984047017]
+shape = SubResource("CircleShape2D_acsdx")
+
+[node name="Lifetime" type="Timer" parent="." unique_id=1610135763]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
