@@ -162,6 +162,7 @@ script = ExtResource("1_t78mg")
 tile_set = SubResource("TileSet_r2ba4")
 
 [node name="Past" type="Node2D" parent="." unique_id=1911005296]
+visible = false
 
 [node name="PastTilemap" type="TileMapLayer" parent="Past" unique_id=1316055268]
 tile_set = SubResource("TileSet_r2ba4")
