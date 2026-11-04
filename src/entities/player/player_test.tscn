@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b4of6rfjb08c4"]
+
+[ext_resource type="PackedScene" uid="uid://2umwv3835cjw" path="res://src/entities/player/player.tscn" id="1_8jbkl"]
+[ext_resource type="Texture2D" uid="uid://w4l6pkl0qi6c" path="res://src/assets/placeholders/HUD/slime1_front.png" id="2_ce5nc"]
+
+[node name="PlayerTest" type="Node2D" unique_id=371748406]
+
+[node name="player" parent="." unique_id=273797720 instance=ExtResource("1_8jbkl")]
+position = Vector2(320, 180)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=842579471]
+zoom = Vector2(3, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1623309233]
+texture_filter = 1
+position = Vector2(315, 146)
+texture = ExtResource("2_ce5nc")
