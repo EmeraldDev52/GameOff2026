@@ -18,6 +18,9 @@ texture_filter = 1
 position = Vector2(8, 2)
 texture = ExtResource("3_muk8e")
 
+[node name="Muzzle" type="Marker2D" parent="WeaponPivot/GunVisual" unique_id=587578872]
+position = Vector2(5, 0)
+
 [node name="Visuals" type="Sprite2D" parent="." unique_id=605509224]
 texture_filter = 1
 texture = ExtResource("2_vt6n5")

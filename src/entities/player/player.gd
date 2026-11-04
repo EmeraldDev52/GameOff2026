@@ -7,6 +7,7 @@ var animation_timer: float = 0.0
 
 @onready var visuals: Sprite2D = $Visuals
 @onready var weapon_pivot: Node2D = $WeaponPivot
+@onready var muzzle: Marker2D = $WeaponPivot/GunVisual/Muzzle
 
 const NORTH_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_north.png") #all textures for PC
 const SOUTH_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_south.png")
@@ -14,6 +15,8 @@ const SIDE_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_
 const DIAG_UP_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_diagup.png")
 const DIAG_DOWN_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_diagdown.png")
 const CROSSHAIR_TEXTURE: Texture2D = preload("res://src/assets/placeholders/HUD/1crosshair.png")
+
+const BULLET_SCENE: PackedScene = preload("res://src/entities/player/projectiles/player_bullet.tscn")
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -62,9 +65,19 @@ func _physics_process(delta: float) -> void:
 
 	weapon_pivot.look_at(get_global_mouse_position())
 
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(
 		CROSSHAIR_TEXTURE,
 		Input.CURSOR_ARROW,
 		Vector2(10,10)
 	)
+
+func shoot() -> void:
+	var  bullet = BULLET_SCENE.instantiate() #creates copy of bullet scene
+	get_tree().current_scene.add_child(bullet) # adds to scene
+	bullet.global_position = muzzle.global_position #set the bullet's starting position to the muzzle's position
+	bullet.direction = Vector2.RIGHT.rotated(weapon_pivot.global_rotation) #set the bullet's direction based on the weapon's rotation
+	
