@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cm2e6x8yrnog0"]
 
 [ext_resource type="Texture2D" uid="uid://4u40v4075cuj" path="res://Assets/Art/world/tilesets/tileset_sf.png" id="1_r2ba4"]
+[ext_resource type="Script" uid="uid://dygcc3ikqxkov" path="res://src/levels/level_parent.gd" id="1_t78mg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r2ba4"]
 texture = ExtResource("1_r2ba4")
@@ -153,6 +154,7 @@ tile_size = Vector2i(64, 64)
 sources/2 = SubResource("TileSetAtlasSource_r2ba4")
 
 [node name="LevelParent" type="Node2D" unique_id=2038401712]
+script = ExtResource("1_t78mg")
 
 [node name="Present" type="Node2D" parent="." unique_id=1351103218]
 
