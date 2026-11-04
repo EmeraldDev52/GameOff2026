@@ -1,3 +1,4 @@
+class_name Level
 extends Node2D
 
 @onready var present: Node2D = $Present
@@ -7,7 +8,7 @@ var current_version: String
 
 
 func _ready() -> void:
-	switch_to_present()
+	switch_to_version("present")
 
 
 func enable(node: Node):
@@ -20,20 +21,19 @@ func disable(node: Node):
 	node.hide()
 
 
-func switch_to_present():
-	enable(present)
-	disable(past)
-	current_version = "present"
-
-
-func switch_to_past():
-	enable(past)
-	disable(present)
-	current_version = "past"
+func switch_to_version(version: String):
+	if version == "present":
+		current_version = "present"
+		enable(present)
+		disable(past)
+	else:
+		current_version = "past"
+		enable(past)
+		disable(present)
 
 
 func toggle_level_version():
 	if current_version == "present":
-		switch_to_past()
+		switch_to_version("past")
 	else:
-		switch_to_present()
+		switch_to_version("present")
