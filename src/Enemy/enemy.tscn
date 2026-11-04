@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://f2jikhlandil"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_r5dps"]
+[ext_resource type="Script" uid="uid://bybxtbhax8u0g" path="res://src/Enemy/enemy.gd" id="1_r3615"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahg1b"]
+size = Vector2(118, 118)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1824991520]
+script = ExtResource("1_r3615")
+
+[node name="Alert" type="ProgressBar" parent="." unique_id=1225091260]
+modulate = Color(0.845669, 0.5722509, 0.21383646, 1)
+offset_left = 63.0
+offset_top = -55.0
+offset_right = 78.0
+offset_bottom = -17.0
+fill_mode = 3
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="ProgressBar" parent="." unique_id=528974717]
+modulate = Color(1, 0, 0, 1)
+offset_left = -47.0
+offset_top = -90.0
+offset_right = 52.0
+offset_bottom = -63.0
+theme_override_colors/font_color = Color(0.9490196, 0.05490196, 0.011764706, 1)
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1970763768]
+texture = ExtResource("1_r5dps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=17767711]
+shape = SubResource("RectangleShape2D_ahg1b")
+
+[node name="AlerTimer" type="Timer" parent="." unique_id=1017193084]
+wait_time = 0.7
+
+[node name="Area2D" type="Area2D" parent="." unique_id=6416960]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=998403279]
+polygon = PackedVector2Array(-3, -3, -158, 195, 136, 194)
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=1777971456]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="AlerTimer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
