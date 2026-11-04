@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://20g42hdqqspy"]
 
+[ext_resource type="PackedScene" uid="uid://cacd47h87a8js" path="res://src/systems/level_loader.tscn" id="1_e5mpl"]
+
 [node name="GameRoot" type="Node2D" unique_id=1404149591]
 process_mode = 3
 
 [node name="Systems" type="Node" parent="." unique_id=1736558554]
+
+[node name="LevelLoader" parent="Systems" unique_id=1207276319 instance=ExtResource("1_e5mpl")]
+unique_name_in_owner = true
 
 [node name="World" type="Node2D" parent="." unique_id=119228256]
 process_mode = 1
