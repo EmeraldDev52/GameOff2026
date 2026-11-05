@@ -8,6 +8,7 @@
 size = Vector2(10, 6)
 
 [node name="player" type="CharacterBody2D" unique_id=273797720]
+collision_layer = 2
 script = ExtResource("1_vt6n5")
 
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1401411734]
@@ -29,3 +30,15 @@ hframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1006516638]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_acsdx")
+
+[node name="FireCooldown" type="Timer" parent="." unique_id=1752138753]
+wait_time = 0.25
+one_shot = true
+
+[node name="DashDuration" type="Timer" parent="." unique_id=1906099401]
+wait_time = 0.15
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=955306510]
+wait_time = 0.6
+one_shot = true

@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://2umwv3835cjw" path="res://src/entities/player/player.tscn" id="1_8jbkl"]
 [ext_resource type="Texture2D" uid="uid://w4l6pkl0qi6c" path="res://src/assets/placeholders/HUD/slime1_front.png" id="2_ce5nc"]
+[ext_resource type="Script" uid="uid://5vqavfw1d3ib" path="res://src/entities/player/test_target.gd" id="2_dk0y1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acsdx"]
+size = Vector2(64, 13)
 
 [node name="PlayerTest" type="Node2D" unique_id=371748406]
 
@@ -11,7 +15,14 @@ position = Vector2(320, 180)
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=842579471]
 zoom = Vector2(3, 3)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1623309233]
+[node name="TestTarget" type="StaticBody2D" parent="." unique_id=754000897]
+collision_mask = 2
+script = ExtResource("2_dk0y1")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestTarget" unique_id=1623309233]
 texture_filter = 1
-position = Vector2(315, 146)
 texture = ExtResource("2_ce5nc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestTarget" unique_id=1495915031]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_acsdx")
