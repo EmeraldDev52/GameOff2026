@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var move_speed: float = 150.0
 @export var animation_fps: float = 8.0
 @export var dash_speed: float = 500.0
+@export var melee_damage: int = 15
+
 
 var dash_direction: Vector2 = Vector2.ZERO
 var animation_timer: float = 0.0
@@ -13,6 +15,10 @@ var animation_timer: float = 0.0
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var dash_duration: Timer = $DashDuration
 @onready var dash_cooldown: Timer = $DashCooldown
+@onready var melee_hitbox: Area2D = $WeaponPivot/MeleeHitbox
+@onready var melee_duration: Timer = $MeleeDuration
+@onready var gun_visual: Sprite2D = $WeaponPivot/GunVisual
+@onready var surge_hitbox: Area2D = $SurgeHitbox
 
 const NORTH_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_north.png") # all textures for PC
 const SOUTH_TEXTURE: Texture2D = preload("res://src/assets/placeholders/player/2_south.png")
@@ -83,8 +89,15 @@ func _physics_process(delta: float) -> void:
 
 	weapon_pivot.look_at(get_global_mouse_position())
 
+	if Input.is_action_just_pressed("melee"):
+		melee_attack()
+
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+	
+	if Input.is_action_just_pressed("temporal_surge"):
+		temporal_surge()
+
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(
@@ -96,9 +109,30 @@ func _ready() -> void:
 func shoot() -> void:
 	if not fire_cooldown.is_stopped():
 		return
+	if not melee_duration.is_stopped():
+		return
 	var bullet = BULLET_SCENE.instantiate() # creates copy of bullet scene
 	get_tree().current_scene.add_child(bullet) # adds to scene
 	bullet.global_position = muzzle.global_position # set the bullet's starting position to the muzzle's position
 	bullet.direction = Vector2.RIGHT.rotated(weapon_pivot.global_rotation) # set the bullet's direction based on the weapon's rotation
 	
 	fire_cooldown.start()
+
+func melee_attack() -> void:
+	if not melee_duration.is_stopped():
+		return
+
+	gun_visual.hide()
+	melee_duration.start()
+	for body in melee_hitbox.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage(melee_damage)
+
+func _on_melee_duration_timeout() -> void:
+	gun_visual.show()
+
+func temporal_surge() -> void:
+	for body in surge_hitbox.get_overlapping_bodies():
+		if body is RigidBody2D:
+			var push_direction = global_position.direction_to(body.global_position)
+			body.apply_central_impulse(push_direction * 160.0)

@@ -4,8 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://batkawtkty7bv" path="res://src/assets/placeholders/player/2_side.png" id="2_vt6n5"]
 [ext_resource type="Texture2D" uid="uid://rlvff1g4n7ks" path="res://src/assets/placeholders/weapons/p_side.png" id="3_muk8e"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld2ot"]
+size = Vector2(20, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acsdx"]
 size = Vector2(10, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acsdx"]
+radius = 40.0
 
 [node name="player" type="CharacterBody2D" unique_id=273797720]
 collision_layer = 2
@@ -21,6 +27,13 @@ texture = ExtResource("3_muk8e")
 
 [node name="Muzzle" type="Marker2D" parent="WeaponPivot/GunVisual" unique_id=587578872]
 position = Vector2(5, 0)
+
+[node name="MeleeHitbox" type="Area2D" parent="WeaponPivot" unique_id=1091132715]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/MeleeHitbox" unique_id=553435194]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_ld2ot")
 
 [node name="Visuals" type="Sprite2D" parent="." unique_id=605509224]
 texture_filter = 1
@@ -42,3 +55,15 @@ one_shot = true
 [node name="DashCooldown" type="Timer" parent="." unique_id=955306510]
 wait_time = 0.6
 one_shot = true
+
+[node name="MeleeDuration" type="Timer" parent="." unique_id=1365131063]
+wait_time = 0.25
+one_shot = true
+
+[node name="SurgeHitbox" type="Area2D" parent="." unique_id=894651060]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SurgeHitbox" unique_id=244316446]
+shape = SubResource("CircleShape2D_acsdx")
+
+[connection signal="timeout" from="MeleeDuration" to="." method="_on_melee_duration_timeout"]

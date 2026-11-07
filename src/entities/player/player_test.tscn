@@ -7,6 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acsdx"]
 size = Vector2(64, 13)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld2ot"]
+
 [node name="PlayerTest" type="Node2D" unique_id=371748406]
 
 [node name="player" parent="." unique_id=273797720 instance=ExtResource("1_8jbkl")]
@@ -26,3 +28,16 @@ texture = ExtResource("2_ce5nc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestTarget" unique_id=1495915031]
 position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_acsdx")
+
+[node name="SurgeDummy" type="RigidBody2D" parent="." unique_id=1472472364]
+position = Vector2(350, 180)
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="SurgeDummy" unique_id=1446744368]
+texture_filter = 1
+texture = ExtResource("2_ce5nc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SurgeDummy" unique_id=783984709]
+shape = SubResource("RectangleShape2D_ld2ot")
